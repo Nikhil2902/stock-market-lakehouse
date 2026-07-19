@@ -10,7 +10,7 @@ This project mirrors a real, common industry pattern: **Spark handles heavy tran
 
 ## Architecture
 
-![Architecture Diagram](images/architecture-diagram.png)
+![Architecture Diagram](architecture-diagram.png)
 
 ```
 Alpha Vantage API (REST)
@@ -87,31 +87,29 @@ Both the Alpha Vantage API key and Snowflake username/password are entered via D
 | GOOGL  | ~$290 – $410 |
 | AAPL   | ~$250 – $330 |
 
-![Tableau Dashboard](images/tableau-dashboard.png)
+![Tableau Dashboard](tableau-dashboard.png)
 
 **Verification — all 300 rows (3 tickers × 100 trading days) landed correctly in Snowflake:**
 
-![Snowflake Verification](images/snowflake-verification.png)
+![Snowflake Verification](snowflake-verification.png)
 
 ## Repo structure
 
 ```
-├── notebooks/
-│   └── Stock_Pipeline_Project.ipynb   # Full Databricks notebook, Bronze → Silver → Gold → Snowflake
-├── sql/
-│   └── snowflake_setup.sql            # Database, schema, warehouse, and table creation
-├── images/
-│   ├── architecture-diagram.png
-│   └── tableau-dashboard.png
-└── README.md
+├── README.md
+├── Stock_Pipeline_Project.ipynb   # Full Databricks notebook: Bronze → Silver → Gold → Snowflake
+├── snowflake_setup.sql            # Database, schema, warehouse, and table creation
+├── architecture-diagram.png
+├── tableau-dashboard.png
+└── snowflake-verification.png
 ```
 
 ## Setup / reproduction
 
 1. Get a free [Alpha Vantage API key](https://www.alphavantage.co/support/#api-key)
 2. Create a free [Snowflake trial account](https://signup.snowflake.com)
-3. Run `sql/snowflake_setup.sql` in a Snowflake worksheet to create the database, schema, warehouse, and target table
-4. Import `notebooks/Stock_Pipeline_Project.ipynb` into Databricks
+3. Run `snowflake_setup.sql` in a Snowflake worksheet to create the database, schema, warehouse, and target table
+4. Import `Stock_Pipeline_Project.ipynb` into Databricks
 5. Enter your Alpha Vantage API key and Snowflake credentials into the notebook widgets at runtime
 6. Run all cells top to bottom
 7. Connect Tableau Public to a CSV export of the final Snowflake table (Tableau Public does not support live Snowflake connections — that requires Tableau Desktop/Server)
@@ -119,3 +117,4 @@ Both the Alpha Vantage API key and Snowflake username/password are entered via D
 ---
 
 *Built as a follow-on to an original single-tool Stock Market ETL pipeline, extending it with a multi-tool architecture (Spark → Snowflake → Tableau) as a step toward production-style data engineering patterns.*
+
